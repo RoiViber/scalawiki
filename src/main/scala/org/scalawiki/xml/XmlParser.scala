@@ -28,7 +28,7 @@ class XmlParser(
 
     readSiteInfo()
 
-    val iterator = new AbstractIterator[Page] {
+    val iterator = new Iterator[Page] {
 
       override def hasNext = findElementStart("page")
 

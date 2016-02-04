@@ -4,7 +4,7 @@ import akka.actor.ActorSystem
 import akka.event.LoggingAdapter
 import akka.io.IO
 import akka.pattern.ask
-import slick.driver.H2Driver.api._
+//import slick.driver.H2Driver.api._
 
 import org.scalawiki.http.{HttpClient, HttpClientImpl}
 import org.scalawiki.json.MwReads._
@@ -216,12 +216,12 @@ object MwBot {
     val system = ActorSystem()
     val http = new HttpClientImpl(system)
 
-    val bot = if (withDb) {
+    val bot = /*if (withDb) {
       val db = Database.forURL("jdbc:h2:~/scalawiki", driver = "org.h2.Driver")
       new MwBotImpl(http, system, host, Some(new MwDatabase(db, Some(MwDatabase.dbName(host)))))
-    } else {
+    } else {*/
       new MwBotImpl(http, system, host, None)
-    }
+    //}
 
     if (withDb) {
       bot.database.foreach(_.createTables())
@@ -238,8 +238,6 @@ object MwBot {
       Future { create(host) }
     }, 1.minute)
   }
-
-
 }
 
 

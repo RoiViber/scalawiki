@@ -27,7 +27,7 @@ class History(val revisions: Seq[Revision]) {
       if (parentId == 0)
         revision.size
       else
-        revisions.find(_.revId.contains(parentId)).flatMap {
+        revisions.filter(_.revId.isDefined).find(_.revId.get == parentId).flatMap {
           parent => delta(parent, revision)
         }
     }
